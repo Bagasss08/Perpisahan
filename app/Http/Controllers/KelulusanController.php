@@ -17,19 +17,16 @@ class KelulusanController extends Controller
     $request->validate([
         'nisn'          => ['required', 'digits:10'],
         'tanggal_lahir' => ['required', 'date'],
-    ], [
-        'nisn.required'          => 'NISN wajib diisi.',
-        'nisn.digits'            => 'NISN harus terdiri dari 10 digit angka.',
-        'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
-        'tanggal_lahir.date'     => 'Format tanggal lahir tidak valid.',
     ]);
 
     $siswa = Siswa::where('nisn', $request->nisn)
         ->whereDate('tanggal_lahir', $request->tanggal_lahir)
         ->first();
 
-    return redirect()
-        ->route('hasil.kelulusan')
-        ->with('siswa', $siswa);
+    if (!$siswa) {
+        return back()->with('error', 'Data siswa tidak ditemukan.');
+    }
+
+    return view('kelulusan.hasil', compact('siswa'));
 }
 }

@@ -451,10 +451,10 @@
 
             {{-- ── Post Visual ── --}}
             <div
-                class="post-visual {{ $siswa->status == 'LULUS' ? 'post-visual-lulus' : 'post-visual-gagal' }}"
+                class="post-visual {{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'post-visual-lulus' : 'post-visual-gagal' }}"
                 id="post-visual"
                 role="img"
-                aria-label="{{ $siswa->status == 'LULUS' ? 'Selamat '.$siswa->nama.' dinyatakan LULUS' : $siswa->nama.' belum dinyatakan lulus' }}"
+                aria-label="{{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'Selamat '.$siswa->nama.' dinyatakan LULUS' : $siswa->nama.' belum dinyatakan lulus' }}"
                 ondblclick="doubleTapLike()"
             >
                 {{-- Decorative rings --}}
@@ -484,14 +484,14 @@
                     </div>
 
                     {{-- Emoji --}}
-                    <span class="visual-emoji" role="img" aria-label="{{ $siswa->status == 'LULUS' ? 'Perayaan' : 'Semangat' }}">
-                        {{ $siswa->status == 'LULUS' ? '🎉' : '💪' }}
+                    <span class="visual-emoji" role="img" aria-label="{{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'Perayaan' : 'Semangat' }}">
+                        {{ strtoupper(trim($siswa->status)) == 'LULUS' ? '🎉' : '💪' }}
                     </span>
 
                     {{-- Status --}}
                     <div class="visual-status-wrap">
-                        <span class="visual-status {{ $siswa->status == 'LULUS' ? 'visual-status-lulus' : 'visual-status-gagal' }}">
-                            {{ $siswa->status == 'LULUS' ? 'SELAMAT ANDA LULUS!' : 'BELUM LULUS' }}
+                        <span class="visual-status {{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'visual-status-lulus' : 'visual-status-gagal' }}">
+                            {{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'SELAMAT ANDA LULUS!' : 'BELUM LULUS' }}
                         </span>
                     </div>
 
@@ -554,14 +554,14 @@
             {{-- Caption --}}
             <div class="post-caption">
                 <span class="uname">mimarif.banteran</span>
-                @if($siswa->status == 'LULUS')
+                @if(strtoupper(trim($siswa->status)) == 'LULUS')
                     Alhamdulillah 🎉 Dengan bangga kami umumkan kelulusan <strong>{{ $siswa->nama }}</strong> dari kelas <strong>{{ $siswa->kelas }}</strong>. Selamat berjuang di babak selanjutnya! ✨🎓
                 @else
                     Pengumuman hasil ujian untuk <strong>{{ $siswa->nama }}</strong> kelas <strong>{{ $siswa->kelas }}</strong>. Tetap semangat, setiap perjalanan punya waktunya masing-masing 💪
                 @endif
                 <br>
                 <span class="hashtag">#Kelulusan2026 #MIMarifBanteran
-                @if($siswa->status == 'LULUS')
+                @if(strtoupper(trim($siswa->status)) == 'LULUS')
                     #Lulus #SelamatLulus #GenerasiEmas 
                 @else
                     #Semangat #BangkitLagi #MasihAdaJalan
@@ -575,7 +575,7 @@
             {{-- Sample comments --}}
             <div class="post-comment">
                 <span class="uname">Bu Neti</span>
-                @if($siswa->status == 'LULUS')
+                @if(strtoupper(trim($siswa->status)) == 'LULUS')
                     Selamat {{ Str::slug($siswa->nama) }} semoga menjadi ilmu yang bermanfaat dan sukses selalu serta jadilah insan penebar kebaikan ❤️🎉
                 @else
                     Jangan menyerah {{ Str::slug($siswa->nama) }}! Setiap kegagalan adalah langkah menuju kesuksesan. Tetap semangat dan terus berusaha! 💪❤️
@@ -583,7 +583,7 @@
             </div>
             <div class="post-comment">
                 <span class="uname">Wali Kelas {{ Str::slug($siswa->nama) }}</span>
-                @if($siswa->status == 'LULUS')
+                @if(strtoupper(trim($siswa->status)) == 'LULUS')
                     {{ $siswa->waliKelas->komentar }}
                 @else
                     Sabar ya nak, Allah punya rencana yang lebih indah 🤗❤️
@@ -591,7 +591,7 @@
             </div>
             <!-- <div class="post-comment">
                 <span class="uname">teman_sekelas_ig</span>
-                @if($siswa->status == 'LULUS')
+                @if($siswa->status_kelulusan == 'LULUS')
                     Yeayyy selamat bro!! Gas kuliah!! 🔥🎉
                 @else
                     Semangat ya! Kamu pasti bisa kok!! 🙏💪
@@ -673,7 +673,7 @@
 
     var SISWA = {
         nama  : @json($siswa?->nama ?? ''),
-        status: @json($siswa?->status ?? '')
+        status: @json($siswa?->status_kelulusan ?? '')
     };
 
     var isLulus   = SISWA.status === 'LULUS';
