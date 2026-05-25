@@ -435,7 +435,7 @@
         <div class="divider"></div>
 
         {{-- Form --}}
-        <form action="{{ route('cek.kelulusan') }}" method="GET">
+        <form action="{{ route('cek.kelulusan') }}" method="POST">
             @csrf
 
             @if ($errors->any())

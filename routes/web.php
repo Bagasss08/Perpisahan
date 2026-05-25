@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\WaliKelasController;
 
 Route::get('/', [KelulusanController::class, 'index']);
 
-Route::get('/cek', [KelulusanController::class, 'cek'])
+Route::post('/cek', [KelulusanController::class, 'cek'])
     ->name('cek.kelulusan');
 
 Route::get('/hasil', function () {
