@@ -358,6 +358,16 @@
         .cd-num    { font-size: 1.5rem; }
         .school-header { padding: 0.75rem 1rem; }
     }
+
+    .bg-canvas,
+.bg-canvas canvas {
+    pointer-events: none;
+}
+
+.main-card {
+    position: relative;
+    z-index: 10;
+}
 </style>
 @endpush
 
@@ -425,7 +435,7 @@
         <div class="divider"></div>
 
         {{-- Form --}}
-        <form action="{{ route('cek.kelulusan') }}" method="POST" novalidate>
+        <form action="{{ route('cek.kelulusan') }}" method="POST">
             @csrf
 
             @if ($errors->any())
@@ -447,7 +457,7 @@
                         placeholder="Masukkan 10 digit NISN"
                         maxlength="10"
                         inputmode="numeric"
-                        pattern="[0-9]{10}"
+                       
                         value="{{ old('nisn') }}"
                         required
                         autocomplete="off"
