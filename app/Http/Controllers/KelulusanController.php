@@ -7,6 +7,11 @@ use App\Models\Siswa;
 
 class KelulusanController extends Controller
 {
+    public function index()
+    {
+        return view('kelulusan.index');
+    }
+
     public function cek(Request $request)
 {
     // Jika akses GET langsung ke /cek

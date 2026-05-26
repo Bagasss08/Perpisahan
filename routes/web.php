@@ -18,17 +18,17 @@ Route::get('/', [KelulusanController::class, 'index']);
 Route::match(['get', 'post'], '/cek', [KelulusanController::class, 'cek'])
     ->name('cek.kelulusan');
 
-Route::get('/hasil', function () {
+// Route::get('/hasil', function () {
 
-    if (!session()->has('siswa')) {
-        return redirect('/');
-    }
+//     if (!session()->has('siswa')) {
+//         return redirect('/');
+//     }
 
-    return view('kelulusan.hasil', [
-        'siswa' => session('siswa')
-    ]);
+//     return view('kelulusan.hasil', [
+//         'siswa' => session('siswa')
+//     ]);
 
-})->name('hasil.kelulusan');
+// })->name('hasil.kelulusan');
 
 /*
 |--------------------------------------------------------------------------
