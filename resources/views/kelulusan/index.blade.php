@@ -368,6 +368,10 @@
     position: relative;
     z-index: 10;
 }
+.main-card form{
+    position: relative;
+    z-index: 999;
+}
 </style>
 @endpush
 

@@ -7,13 +7,13 @@ use App\Models\Siswa;
 
 class KelulusanController extends Controller
 {
-    public function index()
-    {
-        return view('kelulusan.index');
-    }
-
     public function cek(Request $request)
 {
+    // Jika akses GET langsung ke /cek
+    if ($request->isMethod('get')) {
+        return redirect('/');
+    }
+
     $request->validate([
         'nisn'          => ['required', 'digits:10'],
         'tanggal_lahir' => ['required', 'date'],
@@ -24,7 +24,9 @@ class KelulusanController extends Controller
         ->first();
 
     if (!$siswa) {
-        return back()->with('error', 'Data siswa tidak ditemukan.');
+        return back()->withErrors([
+            'nisn' => 'Data siswa tidak ditemukan.'
+        ])->withInput();
     }
 
     return view('kelulusan.hasil', compact('siswa'));
