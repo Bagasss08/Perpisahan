@@ -19,13 +19,15 @@ class KelulusanController extends Controller
             'tanggal_lahir' => 'required',
         ]);
 
-        $siswa = Siswa::where('nisn', trim($request->nisn))
+        $nisn = trim($request->nisn);
+
+        $siswa = Siswa::where('nisn', $nisn)
             ->whereDate('tanggal_lahir', $request->tanggal_lahir)
             ->first();
 
         if (!$siswa) {
-
-            return back()->with('error', 'Data siswa tidak ditemukan');
+            return redirect('/')
+                ->with('error', 'Data siswa tidak ditemukan');
         }
 
         return view('kelulusan.hasil', compact('siswa'));

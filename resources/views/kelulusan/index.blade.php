@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cek Kelulusan</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
-<h1>Cek Kelulusan</h1>
+<h2>Cek Kelulusan</h2>
 
 @if(session('error'))
     <p>{{ session('error') }}</p>
@@ -16,7 +17,7 @@
     <p>{{ $errors->first() }}</p>
 @endif
 
-<form action="{{ route('cek.kelulusan') }}" method="POST">
+<form method="POST" action="{{ route('cek.kelulusan') }}">
 
     @csrf
 
@@ -27,9 +28,8 @@
         <input
             type="text"
             name="nisn"
-            value="{{ old('nisn') }}"
             inputmode="numeric"
-            pattern="[0-9]*"
+            autocomplete="off"
             required
         >
     </div>
@@ -43,7 +43,6 @@
         <input
             type="date"
             name="tanggal_lahir"
-            value="{{ old('tanggal_lahir') }}"
             required
         >
     </div>
