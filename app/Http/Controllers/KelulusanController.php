@@ -14,23 +14,18 @@ class KelulusanController extends Controller
 
     public function cek(Request $request)
     {
-        if ($request->isMethod('get')) {
-            return redirect('/');
-        }
-
         $request->validate([
-            'nisn' => ['required', 'digits:10'],
-            'tanggal_lahir' => ['required', 'date'],
+            'nisn' => 'required',
+            'tanggal_lahir' => 'required',
         ]);
 
-        $siswa = Siswa::where('nisn', $request->nisn)
+        $siswa = Siswa::where('nisn', trim($request->nisn))
             ->whereDate('tanggal_lahir', $request->tanggal_lahir)
             ->first();
 
         if (!$siswa) {
-            return back()->withErrors([
-                'nisn' => 'Data siswa tidak ditemukan.'
-            ])->withInput();
+
+            return back()->with('error', 'Data siswa tidak ditemukan');
         }
 
         return view('kelulusan.hasil', compact('siswa'));

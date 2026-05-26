@@ -2,24 +2,31 @@
 <html>
 <head>
     <title>Cek Kelulusan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
     <h1>Cek Kelulusan</h1>
+
+    @if(session('error'))
+        <p>{{ session('error') }}</p>
+    @endif
 
     @if ($errors->any())
         <p>{{ $errors->first() }}</p>
     @endif
 
     <form action="{{ route('cek.kelulusan') }}" method="POST">
+
         @csrf
 
         <div>
             <label>NISN</label>
+            <br>
+
             <input
-                type="text"
+                type="number"
                 name="nisn"
-                maxlength="10"
                 value="{{ old('nisn') }}"
                 required
             >
@@ -29,6 +36,8 @@
 
         <div>
             <label>Tanggal Lahir</label>
+            <br>
+
             <input
                 type="date"
                 name="tanggal_lahir"
