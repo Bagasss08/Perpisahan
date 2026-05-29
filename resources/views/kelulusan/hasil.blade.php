@@ -643,7 +643,7 @@
                     {{-- Status --}}
                     <div class="visual-status-wrap">
                         <span class="visual-status {{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'visual-status-lulus' : 'visual-status-gagal' }}">
-                            {{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'SELAMAT LULUS!' : 'BELUM LULUS' }}
+                            {{ strtoupper(trim($siswa->status)) == 'LULUS' ? 'SELAMAT ANDA LULUS!' : 'BELUM LULUS' }}
                         </span>
                     </div>
 
@@ -736,7 +736,15 @@
             <div class="post-comment">
                 <span class="uname">Wali Kelas</span>
                 @if(strtoupper(trim($siswa->status)) == 'LULUS')
-                    Selamat atas kelulusanmu! Semoga sukses melanjutkan ke jenjang berikutnya 🎓
+                    Selamat atas kelulusanmu {{ $siswa->nama }}! Selamat melanjutkan ke jenjang berikutnya.
+                @else
+                    Sabar ya nak, Allah punya rencana yang lebih indah 🤗❤️
+                @endif
+            </div>
+            <div class="post-comment">
+                <span class="uname">Alumni MI Banteran</span>
+                @if(strtoupper(trim($siswa->status)) == 'LULUS')
+                    Waktu cepat banget ya tau-tau udah lulus aja, selamat sekarang waktunya melangkah lebih jauh lagi.
                 @else
                     Sabar ya nak, Allah punya rencana yang lebih indah 🤗❤️
                 @endif
