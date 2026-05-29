@@ -45,6 +45,9 @@ RUN chown -R www-data:www-data /var/www/html \
 # Copy nginx config
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
+# Buat .env dari environment variables Railway
+RUN cp .env.example .env || true
+
 # Clear and cache
 RUN php artisan config:clear \
     && php artisan route:clear \
@@ -53,4 +56,4 @@ RUN php artisan config:clear \
 EXPOSE 8080
 
 # Start nginx + php-fpm
-CMD sh -c "php-fpm -D && nginx -g 'daemon off;'"
+CMD sh -c "sed -i 's/listen 8080/listen '\"$PORT\"'/g' /etc/nginx/nginx.conf && php-fpm -D && nginx -g 'daemon off;'"

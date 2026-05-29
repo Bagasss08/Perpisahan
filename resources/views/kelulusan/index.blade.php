@@ -2,6 +2,12 @@
 
     @csrf
 
+    @if(session('error'))
+    <div style="color: red; margin-bottom: 10px;">
+        {{ session('error') }}
+    </div>
+@endif
+
     <div>
         <label>NISN</label>
         <br>

@@ -27,8 +27,7 @@ class KelulusanController extends Controller
 
         $nisn = trim($request->nisn);
 
-        $tanggal = Carbon::parse($request->tanggal_lahir)
-            ->format('Y-m-d');
+        $tanggal = Carbon::parse($request->tanggal_lahir)->format('Y-m-d');
 
         $siswa = Siswa::where('nisn', $nisn)
             ->whereDate('tanggal_lahir', $tanggal)
