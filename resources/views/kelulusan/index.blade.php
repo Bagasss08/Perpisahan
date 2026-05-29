@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Kelulusan</title>
-</head>
-<body>
-
-<h2>Cek Kelulusan</h2>
-
-@if(session('error'))
-    <p>{{ session('error') }}</p>
-@endif
-
-@if ($errors->any())
-    <p>{{ $errors->first() }}</p>
-@endif
-
-<form method="POST" action="{{ route('cek.kelulusan') }}">
+<form method="POST" action="{{ url('/cek') }}">
 
     @csrf
 
@@ -49,11 +30,6 @@
 
     <br>
 
-    <button type="submit">
-        Cek Kelulusan
-    </button>
+    <input type="submit" value="Cek Kelulusan">
 
 </form>
-
-</body>
-</html>
