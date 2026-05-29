@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use Carbon\Carbon;
 
 class KelulusanController extends Controller
 {
@@ -21,8 +22,12 @@ class KelulusanController extends Controller
 
         $nisn = trim($request->nisn);
 
+        // normalisasi tanggal
+        $tanggal = Carbon::parse($request->tanggal_lahir)
+            ->format('Y-m-d');
+
         $siswa = Siswa::where('nisn', $nisn)
-            ->whereDate('tanggal_lahir', $request->tanggal_lahir)
+            ->where('tanggal_lahir', $tanggal)
             ->first();
 
         if (!$siswa) {
