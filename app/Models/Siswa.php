@@ -18,4 +18,9 @@ class Siswa extends Model
     {
         return $this->belongsTo(WaliKelas::class);
     }
+
+    public function getKelasAttribute(): string
+{
+    return $this->waliKelas?->nama_kelas ?? '-';
+}
 }
