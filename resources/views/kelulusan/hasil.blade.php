@@ -728,7 +728,7 @@
             <div class="post-comment">
                 <span class="uname">Bu Neti</span>
                 @if(strtoupper(trim($siswa->status)) == 'LULUS')
-                    Selamat {{ $siswa->nama }} semoga menjadi ilmu yang bermanfaat dan sukses selalu ❤️🎉
+                    Selamat {{ $siswa->nama }} semoga menjadi ilmu yang bermanfaat dan sukses selalu, jadilah insan penebar kebaikan ❤️🎉
                 @else
                     Jangan menyerah {{ $siswa->nama }}! Tetap semangat dan terus berusaha! 💪❤️
                 @endif
@@ -736,7 +736,7 @@
             <div class="post-comment">
                 <span class="uname">Wali Kelas</span>
                 @if(strtoupper(trim($siswa->status)) == 'LULUS')
-                    Selamat atas kelulusanmu {{ $siswa->nama }}! Selamat melanjutkan ke jenjang berikutnya.
+                    Selamat atas kelulusanmu {{ $siswa->nama }}! Selamat melanjutkan belajar di jenjang berikutnya.
                 @else
                     Sabar ya nak, Allah punya rencana yang lebih indah 🤗❤️
                 @endif
