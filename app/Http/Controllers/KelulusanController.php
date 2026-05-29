@@ -14,29 +14,25 @@ class KelulusanController extends Controller
     }
 
     public function cek(Request $request)
-    {
-        // kalau akses GET langsung tampilkan form
-        if ($request->isMethod('get')) {
-            return view('kelulusan.index');
-        }
-
-        $request->validate([
-            'nisn' => 'required',
-            'tanggal_lahir' => 'required',
-        ]);
-
-        $nisn = trim($request->nisn);
-
-        $tanggal = Carbon::parse($request->tanggal_lahir)->format('Y-m-d');
-
-        $siswa = Siswa::where('nisn', $nisn)
-            ->whereDate('tanggal_lahir', $tanggal)
-            ->first();
-
-        if (!$siswa) {
-            return back()->with('error', 'Data siswa tidak ditemukan');
-        }
-
-        return view('kelulusan.hasil', compact('siswa'));
+{
+    if ($request->isMethod('get')) {
+        return view('kelulusan.index');
     }
+
+    $request->validate([
+        'nisn' => 'required',
+        'tanggal_lahir' => 'required',
+    ]);
+
+    $nisn = trim($request->nisn);
+    $tanggal = Carbon::parse($request->tanggal_lahir)->format('Y-m-d');
+
+    // DEBUG SEMENTARA
+    $siswa = Siswa::where('nisn', $nisn)->first();
+    dd([
+        'nisn_input' => $nisn,
+        'tanggal_input' => $tanggal,
+        'siswa_ditemukan' => $siswa ? $siswa->toArray() : 'TIDAK ADA',
+    ]);
+}
 }
