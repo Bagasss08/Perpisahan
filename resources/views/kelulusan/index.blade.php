@@ -487,6 +487,35 @@
         }
 
         /* ─────────────────────────────
+           FORM LOCKED STATE
+        ───────────────────────────── */
+        .form-locked-notice {
+            display: none; /* ditampilkan via JS */
+            background: var(--green-light);
+            border: 1px solid rgba(26,138,74,0.22);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.25rem 1.2rem;
+            text-align: center;
+        }
+
+        .form-locked-notice .lock-emoji {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .form-locked-notice p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .form-locked-notice p span {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* ─────────────────────────────
            RESPONSIVE — MOBILE
         ───────────────────────────── */
         @media (max-width: 480px) {
@@ -640,66 +669,79 @@
                     </div>
                 @endif
 
-                <!-- Divider -->
-                <div class="divider">
-                    <span>Masukkan data siswa</span>
+                <!-- ── FORM LOCKED NOTICE (tampil sebelum 30 Mei 2026 17:00 WIB) ── -->
+                <div class="form-locked-notice" id="form-locked-notice">
+                    <div class="lock-emoji">🔒</div>
+                    <p>
+                        Form cek kelulusan belum dapat diakses.<br>
+                        Formulir akan dibuka pada<br>
+                        <span>Jumat, 30 Mei 2026 · Pukul 17.00 WIB</span>
+                    </p>
                 </div>
 
-                <!-- Form -->
-                <form method="POST" action="{{ route('cek.kelulusan') }}">
-                    @csrf
-
-                    <div class="form-group">
-                        <label class="form-label" for="nisn">NISN</label>
-                        <div class="input-wrap">
-                            <span class="input-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="5" width="20" height="14" rx="3"/>
-                                    <circle cx="8.5" cy="12" r="1.5"/>
-                                    <path d="M13 10.5h4M13 13.5h4"/>
-                                </svg>
-                            </span>
-                            <input
-                                class="form-input"
-                                type="text"
-                                id="nisn"
-                                name="nisn"
-                                inputmode="numeric"
-                                autocomplete="off"
-                                placeholder="Masukkan NISN siswa"
-                                maxlength="10"
-                                required
-                            >
-                        </div>
+                <!-- ── FORM SECTION (disembunyikan sebelum 30 Mei 2026 17:00 WIB) ── -->
+                <div id="form-section" style="display:none;">
+                    <!-- Divider -->
+                    <div class="divider">
+                        <span>Masukkan data siswa</span>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
-                        <div class="input-wrap">
-                            <span class="input-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2"/>
-                                    <path d="M16 2v4M8 2v4M3 10h18"/>
-                                </svg>
-                            </span>
-                            <input
-                                class="form-input"
-                                type="date"
-                                id="tanggal_lahir"
-                                name="tanggal_lahir"
-                                required
-                            >
-                        </div>
-                    </div>
+                    <!-- Form -->
+                    <form method="POST" action="{{ route('cek.kelulusan') }}">
+                        @csrf
 
-                    <button type="submit" class="btn-submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="m21 21-4.35-4.35"/>
-                        </svg>
-                        Cek Kelulusan
-                    </button>
-                </form>
+                        <div class="form-group">
+                            <label class="form-label" for="nisn">NISN</label>
+                            <div class="input-wrap">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="5" width="20" height="14" rx="3"/>
+                                        <circle cx="8.5" cy="12" r="1.5"/>
+                                        <path d="M13 10.5h4M13 13.5h4"/>
+                                    </svg>
+                                </span>
+                                <input
+                                    class="form-input"
+                                    type="text"
+                                    id="nisn"
+                                    name="nisn"
+                                    inputmode="numeric"
+                                    autocomplete="off"
+                                    placeholder="Masukkan NISN siswa"
+                                    maxlength="10"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
+                            <div class="input-wrap">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                                        <path d="M16 2v4M8 2v4M3 10h18"/>
+                                    </svg>
+                                </span>
+                                <input
+                                    class="form-input"
+                                    type="date"
+                                    id="tanggal_lahir"
+                                    name="tanggal_lahir"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.35-4.35"/>
+                            </svg>
+                            Cek Kelulusan
+                        </button>
+                    </form>
+                </div>
 
             </div>
 
@@ -723,7 +765,7 @@
 
 <script>
 (function () {
-    // Target: 2 Juni 2026, pukul 15:00 WIB (UTC+7)
+    // ── COUNTDOWN: Target 2 Juni 2026 pukul 15:00 WIB ──
     var target = new Date('2026-06-02T15:00:00+07:00').getTime();
 
     var elTiles   = document.getElementById('countdown-tiles');
@@ -763,6 +805,30 @@
     }
 
     tick();
+
+    // ── FORM LOCK: Tampilkan form hanya setelah 30 Mei 2026 pukul 17:00 WIB ──
+    var formOpenTime = new Date('2026-05-30T17:00:00+07:00').getTime();
+
+    var elFormSection     = document.getElementById('form-section');
+    var elFormLockedNotice = document.getElementById('form-locked-notice');
+
+    function checkFormLock() {
+        if (Date.now() >= formOpenTime) {
+            // Sudah lewat waktu buka → tampilkan form, sembunyikan notice
+            elFormSection.style.display     = 'block';
+            elFormLockedNotice.style.display = 'none';
+        } else {
+            // Belum waktunya → tampilkan notice, sembunyikan form
+            elFormSection.style.display     = 'none';
+            elFormLockedNotice.style.display = 'block';
+
+            // Hitung sisa waktu sampai form terbuka, lalu cek ulang
+            var msLeft = formOpenTime - Date.now();
+            setTimeout(checkFormLock, Math.min(msLeft, 1000));
+        }
+    }
+
+    checkFormLock();
 }());
 </script>
 
