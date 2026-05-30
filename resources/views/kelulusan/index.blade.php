@@ -41,7 +41,6 @@
                 radial-gradient(ellipse at 85% 90%, rgba(200,150,10,0.05) 0%, transparent 55%);
         }
 
-        /* ── PAGE WRAPPER ── */
         .page-wrapper {
             min-height: 100vh;
             display: flex;
@@ -55,7 +54,6 @@
             max-width: 430px;
         }
 
-        /* ── TOP BADGE ── */
         .top-badge {
             text-align: center;
             margin-bottom: 1.25rem;
@@ -74,7 +72,6 @@
             border: 1px solid rgba(26,138,74,0.22);
         }
 
-        /* ── MAIN CARD ── */
         .main-card {
             background: var(--white);
             border-radius: 24px;
@@ -83,7 +80,6 @@
             overflow: hidden;
         }
 
-        /* ── CARD HEADER ── */
         .card-header {
             background: linear-gradient(150deg, #1a5e30 0%, #1a8a4a 55%, #22a356 100%);
             padding: 2.25rem 2rem 2.5rem;
@@ -92,7 +88,6 @@
             overflow: hidden;
         }
 
-        /* decorative circles */
         .card-header::before {
             content: '';
             position: absolute;
@@ -110,7 +105,6 @@
             pointer-events: none;
         }
 
-        /* white wave at bottom */
         .card-header::after {
             content: '';
             position: absolute;
@@ -120,7 +114,6 @@
             border-radius: 28px 28px 0 0;
         }
 
-        /* ── LOGO ── */
         .logo-outer {
             display: inline-flex;
             align-items: center;
@@ -143,7 +136,6 @@
             display: block;
         }
 
-        /* verified badge */
         .logo-badge {
             position: absolute;
             bottom: 3px; right: 3px;
@@ -203,12 +195,10 @@
             background: rgba(255,255,255,0.4);
         }
 
-        /* ── CARD BODY ── */
         .card-body {
             padding: 1.6rem 1.75rem 2rem;
         }
 
-        /* ── COUNTDOWN ── */
         .countdown-section {
             background: var(--gold-light);
             border: 1px solid rgba(184,135,10,0.2);
@@ -244,7 +234,6 @@
             50%       { opacity: 0.3; }
         }
 
-        /* tiles row */
         .countdown-tiles {
             display: grid;
             grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
@@ -296,7 +285,6 @@
             font-weight: 600;
         }
 
-        /* opened state */
         .countdown-opened {
             display: none;
             text-align: center;
@@ -314,7 +302,7 @@
             font-weight: 700;
         }
 
-        /* ── ERROR ALERT ── */
+        @if(session('error'))
         .alert-error {
             background: #fff0f0;
             border: 1px solid #f5c2c2;
@@ -329,14 +317,13 @@
             gap: 8px;
             line-height: 1.5;
         }
-
         .alert-error-icon {
             font-size: 15px;
             flex-shrink: 0;
             margin-top: 1px;
         }
+        @endif
 
-        /* ── DIVIDER ── */
         .divider {
             display: flex;
             align-items: center;
@@ -361,7 +348,6 @@
             white-space: nowrap;
         }
 
-        /* ── FORM ── */
         .form-group {
             margin-bottom: 1.05rem;
         }
@@ -422,7 +408,6 @@
             cursor: pointer;
         }
 
-        /* ── SUBMIT BUTTON ── */
         .btn-submit {
             width: 100%;
             height: 50px;
@@ -459,7 +444,6 @@
             flex-shrink: 0;
         }
 
-        /* ── CARD FOOTER ── */
         .card-footer {
             border-top: 1px solid var(--border);
             padding: 1rem 1.75rem;
@@ -477,7 +461,6 @@
             font-weight: 700;
         }
 
-        /* ── BOTTOM NOTE ── */
         .bottom-note {
             text-align: center;
             margin-top: 1.2rem;
@@ -486,38 +469,6 @@
             line-height: 1.75;
         }
 
-        /* ─────────────────────────────
-           FORM LOCKED STATE
-        ───────────────────────────── */
-        .form-locked-notice {
-            display: none; /* ditampilkan via JS */
-            background: var(--green-light);
-            border: 1px solid rgba(26,138,74,0.22);
-            border-radius: var(--radius);
-            padding: 1.25rem 1.25rem 1.2rem;
-            text-align: center;
-        }
-
-        .form-locked-notice .lock-emoji {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .form-locked-notice p {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-mid);
-            line-height: 1.6;
-        }
-
-        .form-locked-notice p span {
-            color: var(--green);
-            font-weight: 700;
-        }
-
-        /* ─────────────────────────────
-           RESPONSIVE — MOBILE
-        ───────────────────────────── */
         @media (max-width: 480px) {
             .page-wrapper {
                 padding: 1.5rem 0.85rem;
@@ -598,14 +549,12 @@
 <div class="page-wrapper">
     <div class="card-container">
 
-        <!-- top badge -->
         <div class="top-badge">
             <span>📋 Pengumuman Kelulusan 2026</span>
         </div>
 
         <div class="main-card">
 
-            <!-- ── HEADER ── -->
             <div class="card-header">
                 <span class="deco-circle"></span>
 
@@ -619,10 +568,8 @@
                 <div class="school-sub">Kecamatan Sumbang, Banyumas</div>
             </div>
 
-            <!-- ── BODY ── -->
             <div class="card-body">
 
-                <!-- Countdown -->
                 <div class="countdown-section">
                     <div class="countdown-label">
                         <span class="live-dot"></span>
@@ -661,7 +608,6 @@
                     </div>
                 </div>
 
-                <!-- Error session -->
                 @if(session('error'))
                     <div class="alert-error">
                         <span class="alert-error-icon">⚠️</span>
@@ -669,24 +615,11 @@
                     </div>
                 @endif
 
-                <!-- ── FORM LOCKED NOTICE (tampil sebelum 30 Mei 2026 17:00 WIB) ── -->
-                <div class="form-locked-notice" id="form-locked-notice">
-                    <div class="lock-emoji">🔒</div>
-                    <p>
-                        Form cek kelulusan belum dapat diakses.<br>
-                        Formulir akan dibuka pada<br>
-                        <span>Jumat, 30 Mei 2026 · Pukul 17.00 WIB</span>
-                    </p>
-                </div>
-
-                <!-- ── FORM SECTION (disembunyikan sebelum 30 Mei 2026 17:00 WIB) ── -->
                 <div id="form-section" style="display:none;">
-                    <!-- Divider -->
                     <div class="divider">
                         <span>Masukkan data siswa</span>
                     </div>
 
-                    <!-- Form -->
                     <form method="POST" action="{{ route('cek.kelulusan') }}">
                         @csrf
 
@@ -745,7 +678,6 @@
 
             </div>
 
-            <!-- ── FOOTER ── -->
             <div class="card-footer">
                 <p class="footer-text">
                     Data kelulusan hanya dapat diakses oleh siswa yang terdaftar.<br>
@@ -765,24 +697,38 @@
 
 <script>
 (function () {
-    // ── COUNTDOWN: Target 2 Juni 2026 pukul 15:00 WIB ──
-    var target = new Date('2026-06-02T15:00:00+07:00').getTime();
 
-    var elTiles   = document.getElementById('countdown-tiles');
-    var elOpened  = document.getElementById('countdown-opened');
-    var elLabel   = document.getElementById('countdown-label-text');
-    var elSub     = document.getElementById('countdown-sub');
+    // =============================================
+    // GANTI TANGGAL DI SINI
+    // Format: 'YYYY-MM-DDTHH:MM:SS+07:00'
+    // =============================================
+    var FORM_OPEN  = new Date('2026-05-30T17:00:00+07:00'); // form mulai bisa diisi
+    var COUNTDOWN_TARGET = new Date('2026-06-02T15:00:00+07:00'); // countdown di atas
+    // =============================================
 
-    var elHari  = document.getElementById('cd-hari');
-    var elJam   = document.getElementById('cd-jam');
-    var elMenit = document.getElementById('cd-menit');
-    var elDetik = document.getElementById('cd-detik');
+    // -- countdown tiles --
+    var elTiles  = document.getElementById('countdown-tiles');
+    var elOpened = document.getElementById('countdown-opened');
+    var elLabel  = document.getElementById('countdown-label-text');
+    var elSub    = document.getElementById('countdown-sub');
+    var elHari   = document.getElementById('cd-hari');
+    var elJam    = document.getElementById('cd-jam');
+    var elMenit  = document.getElementById('cd-menit');
+    var elDetik  = document.getElementById('cd-detik');
+
+    // -- form section --
+    var elForm = document.getElementById('form-section');
 
     function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
     function tick() {
-        var diff = target - Date.now();
+        var now  = Date.now();
+        var diff = COUNTDOWN_TARGET - now;
 
+        // tampilkan / sembunyikan form
+        elForm.style.display = (now >= FORM_OPEN) ? 'block' : 'none';
+
+        // countdown tiles
         if (diff <= 0) {
             elTiles.style.display  = 'none';
             elSub.style.display    = 'none';
@@ -806,29 +752,6 @@
 
     tick();
 
-    // ── FORM LOCK: Tampilkan form hanya setelah 30 Mei 2026 pukul 17:00 WIB ──
-    var formOpenTime = new Date('2026-05-30T17:00:00+07:00').getTime();
-
-    var elFormSection     = document.getElementById('form-section');
-    var elFormLockedNotice = document.getElementById('form-locked-notice');
-
-    function checkFormLock() {
-        if (Date.now() >= formOpenTime) {
-            // Sudah lewat waktu buka → tampilkan form, sembunyikan notice
-            elFormSection.style.display     = 'block';
-            elFormLockedNotice.style.display = 'none';
-        } else {
-            // Belum waktunya → tampilkan notice, sembunyikan form
-            elFormSection.style.display     = 'none';
-            elFormLockedNotice.style.display = 'block';
-
-            // Hitung sisa waktu sampai form terbuka, lalu cek ulang
-            var msLeft = formOpenTime - Date.now();
-            setTimeout(checkFormLock, Math.min(msLeft, 1000));
-        }
-    }
-
-    checkFormLock();
 }());
 </script>
 
