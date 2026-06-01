@@ -666,7 +666,7 @@
                         </div>
 
                         <div class="countdown-sub" id="countdown-sub">
-                            Selasa, 02 Juni 2026 &nbsp;·&nbsp; Pukul 15.00 WIB
+                            Selasa, 02 Juni 2026 &nbsp;·&nbsp; Pukul 17.00 WIB
                         </div>
 
                         <div class="countdown-opened" id="countdown-opened">
@@ -759,9 +759,9 @@
 
     <script>
         (function () {
-            // Target: 2 Juni 2026, pukul 15:00 WIB (UTC+7)
+            // Target: 2 Juni 2026, pukul 17:00 WIB (UTC+7)
             // UBAH TANGGAL DI SINI
-            const TANGGAL_PENGUMUMAN = '2026-06-01T00:00:00+07:00';
+            const TANGGAL_PENGUMUMAN = '2026-06-02T17:00:00+07:00';
 
             var target = new Date(TANGGAL_PENGUMUMAN).getTime();
 
