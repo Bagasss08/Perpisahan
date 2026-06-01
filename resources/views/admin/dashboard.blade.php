@@ -57,126 +57,111 @@
     </div>
 </div>
 
-<!-- Content Grid -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-
-    <!-- Recent Siswa -->
-    <div class="card" style="grid-column:1/-1">
-        <div class="card-header" style="padding-bottom:16px">
-            <div>
-                <div class="card-title">Siswa Terbaru</div>
-                <div class="card-subtitle">8 data siswa terakhir ditambahkan</div>
+<!-- Tabel Siswa -->
+<div class="card" style="margin-top:20px">
+    <div class="card-header" style="padding-bottom:16px">
+        <div>
+            <div class="card-title">Data Siswa</div>
+            <div class="card-subtitle">
+                Menampilkan {{ $siswa->firstItem() }}–{{ $siswa->lastItem() }} dari {{ $siswa->total() }} siswa
             </div>
-            <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary btn-sm">
-                Lihat Semua
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
         </div>
-        <div class="divider"></div>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama Siswa</th>
-                        <th>NISN</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Kelas</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($recentSiswa as $siswa)
-                    <tr>
-                        <td>
-                            <div style="display:flex;align-items:center;gap:10px">
-                                <div style="width:32px;height:32px;background:linear-gradient(135deg,#10b981,#6366f1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">
-                                    {{ strtoupper(substr($siswa->nama, 0, 1)) }}
-                                </div>
-                                <span class="fw-600">{{ $siswa->nama }}</span>
+        <a href="{{ route('admin.siswa.index') }}" class="btn btn-secondary btn-sm">
+            Lihat Semua
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </div>
+    <div class="divider"></div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:50px">No</th>
+                    <th>Nama Siswa</th>
+                    <th>NISN</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Kelas</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($siswa as $item)
+                <tr>
+                    <td class="text-muted" style="font-size:13px">{{ $siswa->firstItem() + $loop->index }}</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:10px">
+                            <div style="width:32px;height:32px;background:linear-gradient(135deg,#10b981,#6366f1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">
+                                {{ strtoupper(substr($item->nama, 0, 1)) }}
                             </div>
-                        </td>
-                        <td><span class="font-mono text-muted">{{ $siswa->nisn }}</span></td>
-                        <td>{{ \Carbon\Carbon::parse($siswa->tanggal_lahir)->isoFormat('D MMM Y') }}</td>
-                        <td>{{ $siswa->waliKelas?->nama_kelas ?? '<span class="text-muted">—</span>' }}</td>
-                        <td>
-                            @php
-                                $badges = ['aktif'=>'badge-green','tidak_aktif'=>'badge-gray','lulus'=>'badge-blue','keluar'=>'badge-red'];
-                                $dots = ['aktif'=>'badge-dot-green','tidak_aktif'=>'badge-dot-gray','lulus'=>'badge-dot-blue','keluar'=>'badge-dot-red'];
-                                $labels = ['aktif'=>'Aktif','tidak_aktif'=>'Tidak Aktif','lulus'=>'Lulus','keluar'=>'Keluar'];
-                            @endphp
-                            <span class="badge {{ $badges[$siswa->status] ?? 'badge-gray' }}">
-                                <span class="badge-dot {{ $dots[$siswa->status] ?? 'badge-dot-gray' }}"></span>
-                                {{ $labels[$siswa->status] ?? $siswa->status }}
-                            </span>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="5">
-                            <div class="empty-state">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
-                                </svg>
-                                <div class="empty-state-title">Belum Ada Data</div>
-                                <div class="empty-state-desc">Tambah siswa pertama untuk memulai</div>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+                            <span class="fw-600">{{ $item->nama }}</span>
+                        </div>
+                    </td>
+                    <td><span class="font-mono text-muted">{{ $item->nisn }}</span></td>
+                    <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->isoFormat('D MMM Y') }}</td>
+                    <td>{{ $item->waliKelas?->nama_kelas ?? '—' }}</td>
+                    <td>
+                        @php
+                            $badges = ['aktif'=>'badge-green','tidak_aktif'=>'badge-gray','lulus'=>'badge-blue','keluar'=>'badge-red'];
+                            $dots   = ['aktif'=>'badge-dot-green','tidak_aktif'=>'badge-dot-gray','lulus'=>'badge-dot-blue','keluar'=>'badge-dot-red'];
+                            $labels = ['aktif'=>'Aktif','tidak_aktif'=>'Tidak Aktif','lulus'=>'Lulus','keluar'=>'Keluar'];
+                        @endphp
+                        <span class="badge {{ $badges[$item->status] ?? 'badge-gray' }}">
+                            <span class="badge-dot {{ $dots[$item->status] ?? 'badge-dot-gray' }}"></span>
+                            {{ $labels[$item->status] ?? $item->status }}
+                        </span>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6">
+                        <div class="empty-state">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                            </svg>
+                            <div class="empty-state-title">Belum Ada Data</div>
+                            <div class="empty-state-desc">Tambah siswa pertama untuk memulai</div>
+                        </div>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 
-    <!-- Wali Kelas Summary -->
-    <div class="card" style="grid-column:1/-1">
-        <div class="card-header" style="padding-bottom:16px">
-            <div>
-                <div class="card-title">Ringkasan Kelas</div>
-                <div class="card-subtitle">Jumlah siswa per wali kelas</div>
-            </div>
-            <a href="{{ route('admin.wali-kelas.index') }}" class="btn btn-secondary btn-sm">
-                Kelola Kelas
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
+    {{-- Pagination --}}
+    @if($siswa->hasPages())
+    <div style="padding:16px 20px;border-top:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div style="font-size:13px;color:var(--text-muted)">
+            Halaman {{ $siswa->currentPage() }} dari {{ $siswa->lastPage() }}
         </div>
-        <div class="divider"></div>
-        <div class="card-body">
-            @forelse($waliKelasData as $wk)
-            <div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid #f1f5f9">
-                <div style="width:40px;height:40px;background:#f0fdf4;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2" style="width:20px;height:20px">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                    </svg>
-                </div>
-                <div style="flex:1;min-width:0">
-                    <div style="font-weight:600;font-size:14px;color:var(--text-primary)">{{ $wk->nama_kelas }}</div>
-                    <div style="font-size:12.5px;color:var(--text-muted)">Wali: {{ $wk->nama_wali }}</div>
-                </div>
-                <div style="text-align:right">
-                    <div style="font-size:18px;font-weight:800;color:var(--accent)">{{ $wk->siswas_count }}</div>
-                    <div style="font-size:11px;color:var(--text-muted)">siswa</div>
-                </div>
-                <div style="width:120px">
-                    @php $pct = $stats['total_siswa'] > 0 ? ($wk->siswas_count / $stats['total_siswa']) * 100 : 0; @endphp
-                    <div style="height:6px;background:#f1f5f9;border-radius:999px;overflow:hidden">
-                        <div style="height:100%;width:{{ round($pct) }}%;background:linear-gradient(90deg,#10b981,#059669);border-radius:999px;transition:width .5s ease"></div>
-                    </div>
-                    <div style="font-size:11px;color:var(--text-muted);margin-top:3px;text-align:right">{{ round($pct) }}%</div>
-                </div>
-            </div>
-            @empty
-            <div class="empty-state" style="padding:24px">
-                <div class="empty-state-desc">Belum ada wali kelas</div>
-            </div>
-            @endforelse
+        <div style="display:flex;gap:6px;align-items:center">
+            {{-- Prev --}}
+            @if($siswa->onFirstPage())
+                <span style="padding:6px 12px;border-radius:6px;border:1px solid #e2e8f0;font-size:13px;color:#cbd5e1;cursor:not-allowed">← Prev</span>
+            @else
+                <a href="{{ $siswa->previousPageUrl() }}" style="padding:6px 12px;border-radius:6px;border:1px solid #e2e8f0;font-size:13px;color:var(--text-primary);text-decoration:none;transition:all .2s" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">← Prev</a>
+            @endif
+
+            {{-- Page Numbers --}}
+            @foreach($siswa->getUrlRange(max(1, $siswa->currentPage()-2), min($siswa->lastPage(), $siswa->currentPage()+2)) as $page => $url)
+                @if($page == $siswa->currentPage())
+                    <span style="padding:6px 12px;border-radius:6px;background:var(--accent);color:white;font-size:13px;font-weight:600">{{ $page }}</span>
+                @else
+                    <a href="{{ $url }}" style="padding:6px 12px;border-radius:6px;border:1px solid #e2e8f0;font-size:13px;color:var(--text-primary);text-decoration:none;transition:all .2s" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">{{ $page }}</a>
+                @endif
+            @endforeach
+
+            {{-- Next --}}
+            @if($siswa->hasMorePages())
+                <a href="{{ $siswa->nextPageUrl() }}" style="padding:6px 12px;border-radius:6px;border:1px solid #e2e8f0;font-size:13px;color:var(--text-primary);text-decoration:none;transition:all .2s" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">Next →</a>
+            @else
+                <span style="padding:6px 12px;border-radius:6px;border:1px solid #e2e8f0;font-size:13px;color:#cbd5e1;cursor:not-allowed">Next →</span>
+            @endif
         </div>
     </div>
-
+    @endif
 </div>
 
 @endsection
