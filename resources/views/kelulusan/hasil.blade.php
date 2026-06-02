@@ -707,7 +707,8 @@
             <div class="post-caption">
                 <span class="uname">mimarif.banteran</span>
                 @if(strtoupper(trim($siswa->status)) == 'LULUS')
-                    Alhamdulillah 🎉 Dengan bangga kami umumkan kelulusan <strong>{{ $siswa->nama }}</strong> dari kelas <strong>{{ $siswa->kelas }}</strong>. Selamat berjuang di babak selanjutnya! ✨🎓
+                    <!-- Alhamdulillah 🎉 Dengan bangga kami umumkan kelulusan <strong>{{ $siswa->nama }}</strong> dari kelas <strong>{{ $siswa->kelas }}</strong>. Selamat berjuang di babak selanjutnya! ✨🎓 -->
+                    Pengumuman kelulusan Murid Kelas 6 MI Ma'arif NU Banteran Tahun Ajaran 2025/2026 berdasarkan SK Penetapan Kelulusan Nomor 39 Tahun 2026 tanggal 2 Juni 2026
                 @else
                     Pengumuman hasil ujian untuk <strong>{{ $siswa->nama }}</strong> kelas <strong>{{ $siswa->kelas }}</strong>. Tetap semangat, setiap perjalanan punya waktunya masing-masing 💪
                 @endif

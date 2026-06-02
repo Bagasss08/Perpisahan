@@ -761,7 +761,7 @@
         (function () {
             // Target: 2 Juni 2026, pukul 17:00 WIB (UTC+7)
             // UBAH TANGGAL DI SINI
-            const TANGGAL_PENGUMUMAN = '2026-06-02T17:00:00+07:00';
+            const TANGGAL_PENGUMUMAN = '2026-06-02T08:30:00+07:00';
 
             var target = new Date(TANGGAL_PENGUMUMAN).getTime();
 
